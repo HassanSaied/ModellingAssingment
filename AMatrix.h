@@ -10,9 +10,11 @@
 #include "Capacitance.h"
 #include "VoltageSource.h"
 #include "Matrix.h"
+#include <ostream>
 class AMatrix {
 private:
     double ** matrix;
+    int numRows,numColumns;
     int gMatrixRowStart,gMatrixColumnStart;
     int bMatrixRowStart,bMatrixColumnStart;
     int cMatrixRowStart,cMatrixColumnStart;
@@ -21,12 +23,15 @@ private:
     void editBMatrix(int row, int column, double value);
     void editCMatrix(int row, int column, double value);
     void editDMatrix(int row, int column, double value);
+    bool checkAndDecrement(int & row, int & column);
 public:
-    void registerResistance(Resistance resistance);
-    void registerCapacitance(Capacitance capacitance);
-    void registerInductance(Inductance inductance);
-    void registerVoltageSource(VoltageSource voltageSource);
-    AMatrix(int n, int m, int l);
+    void registerResistance(const Resistance &resistance);
+    void registerCapacitance(const Capacitance &capacitance);
+    void registerInductance(const Inductance &inductance);
+    void registerVoltageSource(const VoltageSource &voltageSource);
+    friend std::ostream & operator << (std::ostream & ostream, const AMatrix & aMatrix);
+    AMatrix(int n, int m);
+    ~AMatrix();
 
 };
 

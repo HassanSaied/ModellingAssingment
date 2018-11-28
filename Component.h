@@ -25,7 +25,7 @@ private:
 
 public:
     Component(int srcNode, int dstNode, double value, double currentParameter);
-    virtual void updateMatrix(AMatrix & aMatrix, ZMatrix & zMatrix) = 0;
+    virtual void initializeMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) = 0;
 
     void setCurrentParameter(double currentParameter);
 

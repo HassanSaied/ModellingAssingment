@@ -3,13 +3,21 @@
 //
 
 #include "VoltageSource.h"
-
-VoltageSource::VoltageSource(int srcNode, int dstNode, double value, double currentParam) : Component(srcNode, dstNode,
-                                                                                                      value,
-                                                                                                      currentParam) {
+#include "AMatrix.h"
+#include "ZMatrix.h"
+VoltageSource::VoltageSource(int srcNode, int dstNode, double value, double currentParam, int index) : Component(
+        srcNode, dstNode,
+        value,
+        currentParam), index(index) {
 
 }
 
-void VoltageSource::updateMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) {
+void VoltageSource::initializeMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) {
+    aMatrix.registerVoltageSource(*this);
+    zMatrix.registerVoltageSource(*this);
 
+}
+
+int VoltageSource::getIndex() const {
+    return index;
 }

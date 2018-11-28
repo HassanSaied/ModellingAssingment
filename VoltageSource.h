@@ -9,9 +9,14 @@
 #include "Component.h"
 
 class VoltageSource : public Component {
-    VoltageSource(int srcNode, int dstNode, double value, double currentParam);
+private:
+    int index;
+public:
+    VoltageSource(int srcNode, int dstNode, double value, double currentParam,int index);
 
-    void updateMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) override;
+    int getIndex() const;
+
+    void initializeMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) override;
 };
 
 

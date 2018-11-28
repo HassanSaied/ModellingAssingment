@@ -9,7 +9,7 @@ Resistance::Resistance(int srcNode, int dstNode, double value, double currentPar
 
 }
 
-void Resistance::updateMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) {
-
+void Resistance::initializeMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) {
+    aMatrix.registerResistance(*this);
 
 }

@@ -3,8 +3,9 @@
 //
 
 #include "CurrentSource.h"
-
-void CurrentSource::updateMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) {
+#include "ZMatrix.h"
+void CurrentSource::initializeMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) {
+    zMatrix.registerCurrentSource(*this);
 
 }
 

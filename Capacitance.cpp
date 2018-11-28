@@ -3,12 +3,14 @@
 //
 
 #include "Capacitance.h"
-
+#include "AMatrix.h"
+#include "ZMatrix.h"
 Capacitance::Capacitance(int srcNode, int dstNode, double value, double currentParam) : Component(srcNode, dstNode,
                                                                                                   value, currentParam) {
 
 }
 
-void Capacitance::updateMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) {
-
+void Capacitance::initializeMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) {
+    aMatrix.registerCapacitance(*this);
+    zMatrix.registerCapacitance(*this);
 }

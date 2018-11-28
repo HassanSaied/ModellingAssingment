@@ -9,9 +9,10 @@
 #include "Component.h"
 
 class Capacitance : public Component {
+public:
     Capacitance(int srcNode, int dstNode, double value, double currentParam);
 
-    void updateMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) override;
+    void initializeMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) override;
 };
 
 

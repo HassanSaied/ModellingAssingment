@@ -9,9 +9,16 @@
 #include "Component.h"
 
 class Inductance : public Component {
-    Inductance(int srcNode, int dstNode, double value, double currentParam);
+private:
+public:
+    int getIndex() const;
 
-    void updateMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) override;
+private:
+    int index;
+public:
+    Inductance(int srcNode, int dstNode, double value, double currentParam, int index);
+
+    void initializeMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) override;
 
 };
 

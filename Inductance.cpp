@@ -3,12 +3,18 @@
 //
 
 #include "Inductance.h"
-
-Inductance::Inductance(int srcNode, int dstNode, double value, double currentParam) : Component(srcNode, dstNode, value,
-                                                                                                currentParam) {
+#include "AMatrix.h"
+#include "ZMatrix.h"
+Inductance::Inductance(int srcNode, int dstNode, double value, double currentParam, int index) : Component(srcNode, dstNode, value,
+                                                                                                currentParam),index(index) {
 
 }
 
-void Inductance::updateMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) {
+void Inductance::initializeMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) {
+    aMatrix.registerInductance(*this);
+    zMatrix.registerInductance(*this);
+}
 
+int Inductance::getIndex() const {
+    return index;
 }

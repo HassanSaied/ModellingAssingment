@@ -8,9 +8,10 @@
 
 #include "Component.h"
 
-class CurrentSource : Component {
+class CurrentSource : public Component {
+public:
     CurrentSource(int srcNode, int dstNode, double value, double currentParam);
-    void updateMatrix(AMatrix & aMatrix, ZMatrix & zMatrix) override;
+    void initializeMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) override;
 };
 
 
