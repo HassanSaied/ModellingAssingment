@@ -38,7 +38,7 @@ void ZMatrix::registerCurrentSource(const CurrentSource &currentSource) {
 }
 
 void ZMatrix::registerInductance(const Inductance &inductance) {
-    double value = inductance.getValue()*inductance.getCurrentParameter();
+    double value = inductance.getValue()*-inductance.getCurrentParameter();
     editEMatrix(inductance.getIndex(),value);
 }
 
@@ -55,12 +55,12 @@ ZMatrix::ZMatrix(int n, int m) {
 
 void ZMatrix::editIMatrix(int row, double value) {
     row-=1;
-    matrix[row][1] = value;
+    matrix[row][0] = value;
 }
 
 void ZMatrix::editEMatrix(int row, double value) {
     row+=eMatrixBegin;
-    matrix[row][1] = value;
+    matrix[row][0] = value;
 }
 
 ZMatrix::~ZMatrix() {
@@ -72,7 +72,10 @@ ZMatrix::~ZMatrix() {
 
 std::ostream &operator<<(std::ostream &outputStream, const ZMatrix &zMatrix) {
     for (int i = 0; i < zMatrix.matrixSize; ++i) {
-        outputStream<<zMatrix.matrix[i]<<std::endl;
+        outputStream<<zMatrix.matrix[i][0]<<std::endl;
     }
     return outputStream;
+}
+double **ZMatrix::getMatrix() const {
+    return matrix;
 }

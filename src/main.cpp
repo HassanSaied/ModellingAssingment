@@ -6,14 +6,14 @@
 #include "Resistance.h"
 #include "ZMatrix.h"
 #include "AMatrix.h"
-
-#define INPUT_FILE "input.txt"
+#include "XMatrix.h"
 #define CurrentSourceString "Isrc"
 #define ResistanceString "R"
 #define VoltageSourceString "Vsrc"
 #define InductanceString "I"
 #define CapacitanceString "C"
 #define H 0.1
+#define MAX_TIME 2
 using namespace std;
 int voltageSourcesIndex = 0;
 int numNodes = 0;
@@ -49,13 +49,30 @@ vector<Component *> readFile(string fileName) {
     return components;
 }
 
-int main() {
-    vector<Component*> components = readFile(INPUT_FILE);
-    AMatrix aMatrix(numNodes,voltageSourcesIndex);
-    ZMatrix zMatrix(numNodes,voltageSourcesIndex);
-    for (auto component : components){
-        component->initializeMatrix(aMatrix,zMatrix);
+int main(int argc, char ** argv) {
+    if(argc != 3){
+        cout<<"Error in usage please supply input file then output file";
+        abort();
     }
-    cout<< aMatrix<<endl<<zMatrix;
+    string inputFile = argv[1];
+    string outputFile = argv[2];
+    vector<Component *> components = readFile(inputFile);
+    AMatrix aMatrix(numNodes, voltageSourcesIndex);
+    ZMatrix zMatrix(numNodes, voltageSourcesIndex);
+    XMatrix xMatrix(numNodes,voltageSourcesIndex);
+    for (auto component : components) {
+        component->initializeMatrix(aMatrix, zMatrix);
+    }
+    for (double time = 0; time < MAX_TIME; time += H) {
+        xMatrix.updateMatrix(aMatrix,zMatrix);
+        for(auto component:components){
+            component->updateValueAfterIteration(xMatrix,zMatrix);
+        }
+    }
+    ofstream out(outputFile);
+    if(out.is_open()){
+        out<<xMatrix<<endl;
+    }
+
 
 }

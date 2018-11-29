@@ -14,3 +14,7 @@ CurrentSource::CurrentSource(int srcNode, int dstNode, double value, double curr
                                                                                                       currentParam) {
 
 }
+
+void CurrentSource::updateValueAfterIteration(XMatrix &xMatrix, ZMatrix &zMatrix) {
+
+}

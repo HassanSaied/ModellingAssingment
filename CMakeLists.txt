@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 2.8)
 project(ModellingAssignment2)
 
 set(CMAKE_CXX_STANDARD 14)
-
-add_executable(ModellingAssignment2 main.cpp Matrix.h Matrix.cpp AMatrix.cpp AMatrix.h Component.cpp Component.h Resistance.cpp Resistance.h Capacitance.cpp Capacitance.h Inductance.cpp Inductance.h VoltageSource.cpp VoltageSource.h CurrentSource.cpp CurrentSource.h ZMatrix.cpp ZMatrix.h)
+include_directories(includes)
+add_executable(ModellingAssignment2 src/main.cpp includes/Matrix.h src/Matrix.cpp src/AMatrix.cpp includes/AMatrix.h src/Component.cpp includes/Component.h src/Resistance.cpp includes/Resistance.h src/Capacitance.cpp includes/Capacitance.h src/Inductance.cpp includes/Inductance.h src/VoltageSource.cpp includes/VoltageSource.h src/CurrentSource.cpp includes/CurrentSource.h src/ZMatrix.cpp includes/ZMatrix.h src/XMatrix.cpp includes/XMatrix.h)

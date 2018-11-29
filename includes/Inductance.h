@@ -19,6 +19,7 @@ public:
     Inductance(int srcNode, int dstNode, double value, double currentParam, int index);
 
     void initializeMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) override;
+    void updateValueAfterIteration(XMatrix &xMatrix, ZMatrix &zMatrix) override;
 
 };
 

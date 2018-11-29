@@ -13,3 +13,7 @@ void Resistance::initializeMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) {
     aMatrix.registerResistance(*this);
 
 }
+
+void Resistance::updateValueAfterIteration(XMatrix &xMatrix, ZMatrix &zMatrix) {
+
+}

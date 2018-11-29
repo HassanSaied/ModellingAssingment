@@ -10,6 +10,8 @@
 #include "VoltageSource.h"
 #include "Inductance.h"
 #include <ostream>
+
+
 class ZMatrix {
 private:
     double ** matrix;
@@ -25,6 +27,8 @@ public:
     friend std::ostream & operator << (std::ostream & outputStream, const ZMatrix & zMatrix);
     ZMatrix(int n, int m);
     ~ZMatrix();
+
+    double **getMatrix() const;
 
 };
 

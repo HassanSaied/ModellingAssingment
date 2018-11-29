@@ -17,6 +17,7 @@ public:
     int getIndex() const;
 
     void initializeMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) override;
+    void updateValueAfterIteration(XMatrix &xMatrix, ZMatrix &zMatrix) override;
 };
 
 

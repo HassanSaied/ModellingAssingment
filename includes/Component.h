@@ -5,6 +5,8 @@
 #ifndef MODELLINGASSIGNMENT2_COMPONENT_H
 #define MODELLINGASSIGNMENT2_COMPONENT_H
 
+
+class XMatrix;
 class AMatrix;
 class ZMatrix;
 class Component {
@@ -26,8 +28,8 @@ private:
 public:
     Component(int srcNode, int dstNode, double value, double currentParameter);
     virtual void initializeMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) = 0;
-
     void setCurrentParameter(double currentParameter);
+    virtual void updateValueAfterIteration(XMatrix &xMatrix, ZMatrix &zMatrix) = 0;
 
 };
 

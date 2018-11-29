@@ -33,6 +33,8 @@ public:
     AMatrix(int n, int m);
     ~AMatrix();
 
+    double **getMatrix() const;
+
 };
 
 

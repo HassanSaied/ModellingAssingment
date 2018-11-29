@@ -21,3 +21,7 @@ void VoltageSource::initializeMatrix(AMatrix &aMatrix, ZMatrix &zMatrix) {
 int VoltageSource::getIndex() const {
     return index;
 }
+
+void VoltageSource::updateValueAfterIteration(XMatrix &xMatrix, ZMatrix &zMatrix) {
+
+}
