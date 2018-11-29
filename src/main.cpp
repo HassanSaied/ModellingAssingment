@@ -15,6 +15,7 @@
 #define H 0.1
 #define MAX_TIME 2
 using namespace std;
+
 int voltageSourcesIndex = 0;
 int numNodes = 0;
 
@@ -49,6 +50,7 @@ vector<Component *> readFile(string fileName) {
     return components;
 }
 
+
 int main(int argc, char ** argv) {
     if(argc != 3){
         cout<<"Error in usage please supply input file then output file";
@@ -73,6 +75,7 @@ int main(int argc, char ** argv) {
     if(out.is_open()){
         out<<xMatrix<<endl;
     }
+    xMatrix.plot();
 
 
 }

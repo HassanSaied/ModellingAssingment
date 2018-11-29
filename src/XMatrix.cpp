@@ -2,8 +2,10 @@
 // Created by hassan on 11/29/18.
 //
 
-#include "XMatrix.h"
 
+#include "XMatrix.h"
+#include "matplotlibcpp.h"
+namespace plt = matplotlibcpp;
 XMatrix::XMatrix(int n, int m) : nodeVoltages(n, vector<double>()), currentValues(m, vector<double>()) {
     matrixSize = n + m;
     numNodes = n;
@@ -77,6 +79,28 @@ ostream &operator<<(ostream &outputStream, const XMatrix &xMatrix) {
         }
     }
     return outputStream;
+}
+
+void XMatrix::plot() {
+    vector<double> time(nodeVoltages[0].size(),0);
+    double timeCounter = 0;
+    for (auto & timeUnit : time) {
+        timeCounter+=0.1;
+        timeUnit = timeCounter;
+    }
+    int nodeCounter = 0;
+    for(auto & nodeVoltageVector : nodeVoltages){
+        plt::named_plot("Voltage at node "+to_string(++nodeCounter),time,nodeVoltageVector);
+    }
+    int currentSourceCounter = 0;
+    for(auto & voltageThroughCurrentSource : currentValues){
+        plt::named_plot("Current through voltage source "+to_string(++currentSourceCounter),time,voltageThroughCurrentSource);
+    }
+    plt::xlabel("Time(s)");
+    plt::legend();
+    plt::show();
+
+
 }
 
 

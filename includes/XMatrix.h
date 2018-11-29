@@ -22,6 +22,7 @@ public:
     double getCurrentThroughVoltageSrc(int voltageSourceIndex);
     ~XMatrix();
     friend ostream &operator << (ostream & out, const XMatrix & xMatrix);
+    void plot();
 };
 
 
