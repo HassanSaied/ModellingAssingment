@@ -5,7 +5,9 @@
 
 #include "XMatrix.h"
 #include "matplotlibcpp.h"
+
 namespace plt = matplotlibcpp;
+
 XMatrix::XMatrix(int n, int m) : nodeVoltages(n, vector<double>()), currentValues(m, vector<double>()) {
     matrixSize = n + m;
     numNodes = n;
@@ -65,7 +67,7 @@ ostream &operator<<(ostream &outputStream, const XMatrix &xMatrix) {
     for (const vector<double> &singleNodeVoltages :xMatrix.nodeVoltages) {
         outputStream << "Voltages at node " << ++nodeCounter << std::endl;
         for (const double &nodeVoltage : singleNodeVoltages) {
-            outputStream <<"Time : "<< timeCounter << " Voltage Value : " << nodeVoltage << std::endl;
+            outputStream << "Time : " << timeCounter << " Voltage Value : " << nodeVoltage << std::endl;
             timeCounter += 0.1;
         }
     }
@@ -74,7 +76,7 @@ ostream &operator<<(ostream &outputStream, const XMatrix &xMatrix) {
     for (const vector<double> &singleVoltageSourceCurrent : xMatrix.currentValues) {
         outputStream << "Current through voltage Source " << ++voltageSourceCounter << std::endl;
         for (const double &currentThroughVoltageSource : singleVoltageSourceCurrent) {
-            outputStream <<"Time : "<< timeCounter << " Current Value : " << currentThroughVoltageSource << std::endl;
+            outputStream << "Time : " << timeCounter << " Current Value : " << currentThroughVoltageSource << std::endl;
             timeCounter += 0.1;
         }
     }
@@ -82,21 +84,29 @@ ostream &operator<<(ostream &outputStream, const XMatrix &xMatrix) {
 }
 
 void XMatrix::plot() {
-    vector<double> time(nodeVoltages[0].size(),0);
+    vector<double> time(nodeVoltages[0].size(), 0);
     double timeCounter = 0;
-    for (auto & timeUnit : time) {
-        timeCounter+=0.1;
+    for (auto &timeUnit : time) {
+        timeCounter += 0.1;
         timeUnit = timeCounter;
     }
     int nodeCounter = 0;
-    for(auto & nodeVoltageVector : nodeVoltages){
-        plt::named_plot("Voltage at node "+to_string(++nodeCounter),time,nodeVoltageVector);
+    for (auto &nodeVoltageVector : nodeVoltages) {
+        plt::named_plot("Voltage at node " + to_string(++nodeCounter), time, nodeVoltageVector);
     }
-    int currentSourceCounter = 0;
-    for(auto & voltageThroughCurrentSource : currentValues){
-        plt::named_plot("Current through voltage source "+to_string(++currentSourceCounter),time,voltageThroughCurrentSource);
-    }
+    plt::title("Voltage Values");
     plt::xlabel("Time(s)");
+    plt::ylabel("Transient Response(v)");
+    plt::legend();
+    plt::show();
+    int currentSourceCounter = 0;
+    for (auto &voltageThroughCurrentSource : currentValues) {
+        plt::named_plot("Current through voltage source " + to_string(++currentSourceCounter), time,
+                        voltageThroughCurrentSource);
+    }
+    plt::title("Current Values");
+    plt::xlabel("Time(s)");
+    plt::ylabel("Current (Amp)");
     plt::legend();
     plt::show();
 
